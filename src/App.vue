@@ -4,7 +4,7 @@
     <Table :lessons="lessons" :lesson="lesson" :today="today"/>
   </div>
   <footer class="bg-gray-900 text-amber-50 mt-auto mb-0">
-    <div class="container mx-auto p-3">
+    <div class="container mx-auto p-4">
       <a href="https://www.freepik.com/vectors/school" target="_blank">School vector created by ibrandify - www.freepik.com</a>
     </div>
   </footer>
