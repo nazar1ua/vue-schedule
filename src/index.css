@@ -1,0 +1,30 @@
+*, *::before, *::after {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.dark, html.dark * {
+    color-scheme: dark;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    51% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation: 1s linear 1s infinite alternate blink;
+}
