@@ -3,6 +3,9 @@
 # abort on errors
 set -e
 
+# if first time
+yarn
+
 # build
 yarn build
 

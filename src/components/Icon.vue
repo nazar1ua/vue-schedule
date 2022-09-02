@@ -7,11 +7,11 @@
   <Geography v-else-if="lesson === 'Географія'"/>
   <It v-else-if="lesson === 'Інформатика'"/>
   <Ualiterature v-else-if="lesson === 'Українська література'"/>
-  <Algebra v-else-if="lesson === 'Алгебра'"/>
+  <Algebra v-else-if="lesson === 'Алгебра' || lesson === 'Математика'"/>
   <English v-else-if="lesson === 'Англійська мова'"/>
   <Ukrainian v-else-if="lesson === 'Українська мова'"/>
   <Uahistory v-else-if="lesson === 'Історія України'"/>
-  <History v-else-if="lesson === 'Всесвітня історія'"/>
+  <History v-else-if="lesson === 'Всесвітня історія' || lesson === 'Історія'"/>
   <Pe v-else-if="lesson === 'Фізкультура'"/>
   <Geometry v-else-if="lesson === 'Геометрія'"/>
   <Work v-else-if="lesson === 'Трудове навчання'"/>
