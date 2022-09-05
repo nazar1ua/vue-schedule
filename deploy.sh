@@ -28,4 +28,5 @@ git commit -m "Розгортання $(date +"%T %D")"
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:nazar1ua/vue-schedule.git gh-pages:gh-pages
 
-cd -
+cd ..
+rm -rf dist
