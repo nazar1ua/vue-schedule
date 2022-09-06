@@ -1,9 +1,9 @@
 <template>
   <Alchemy v-if="lesson === 'Хімія'"/>
   <Ethics v-else-if="lesson === 'Християнська етика'"/>
-  <Rights v-else-if="lesson === 'Правознавство'"/>
+  <Rights v-else-if="lesson === 'Правознавство' || lesson === 'Громадянська освіта'"/>
   <Paint v-else-if="lesson === 'Мистецтво'"/>
-  <Health v-else-if="lesson === 'Основи здоров\'я'"/>
+  <Health v-else-if="lesson === 'Основи здоров\'я' || lesson === 'Медицина'"/>
   <Geography v-else-if="lesson === 'Географія'"/>
   <It v-else-if="lesson === 'Інформатика'"/>
   <Ualiterature v-else-if="lesson === 'Українська література'"/>
