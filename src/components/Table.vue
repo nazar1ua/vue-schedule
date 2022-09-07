@@ -1,5 +1,5 @@
 <template>
-  <div class="grid xl:grid-cols-5 gap-6 my-6" ref="grid">
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6" ref="grid">
     <template v-for="(day, index) in lessons.days" :key="day.name + index + Math.random()">
       <div v-show="day.lessons.length > 0" class="border border-indigo-300 rounded-xl pt-1" :class="{ 'bg-indigo-50 dark:bg-indigo-900': index === today }">
         <div class="px-2 pb-1 flex justify-between items-center">
@@ -12,7 +12,7 @@
           <li class="flex items-center px-2 py-0.5 border-t border-t-indigo-300" v-for="(subject, number) in day.lessons" :key="subject + number + Math.random()">
             <input type="checkbox" @change="handleChange" @keyup.enter="handleKeyup" :checked="todo[index][number]" class="shrink-0 mr-1 appearance-none h-4 w-4 rounded border border-indigo-300 dark:border-indigo-500 cursor-pointer transition-all bg-[length:0%] checked:bg-[length:0.9rem] checked:bg-indigo-300 dark:checked:bg-indigo-500 checked:bg-center checked:bg-[url('src/assets/checkbox.svg')] outline-none focus-visible:ring focus-visible:ring-indigo-200 dark:focus-visible:ring-indigo-600 bg-no-repeat">
             <Icon :lesson="subject"/>
-            <span class="truncate" :class="{ 'font-medium': subject === lesson && today === index }">{{subject}}</span>
+            <span class="truncate" :class="{ 'font-medium': subject === lesson && today === index }">{{subject}} <span :class="[todo[index][number] ? 'line-through' : '']">{{homework[index][number] !== null ? '(' + homework[index][number].text + ')' : ''}}</span></span>
           </li>
         </ul>
       </div>
@@ -26,7 +26,7 @@ import Icon from './Icon.vue'
 export default {
   name: "Table",
   components: {Icon},
-  props: ['lessons', 'lesson', 'today'],
+  props: ['lessons', 'lesson', 'today', 'homework'],
   data() {
     return {
       todo: this.getStorage(),
@@ -58,6 +58,11 @@ export default {
         }
       }
       eventStatus = Boolean(!!event.target.checked);
+      if (eventStatus) {
+        event.path[0].nextElementSibling.nextElementSibling.children[0].classList.add('line-through')
+      } else {
+        event.path[0].nextElementSibling.nextElementSibling.children[0].classList.remove('line-through')
+      }
       let todo = this.getStorage();
       todo[eventDay][eventLesson] = eventStatus;
       this.setStorage(todo);
@@ -74,6 +79,7 @@ export default {
       const parent = this.$refs.grid.children[day].children[1].children;
       for (let index = 0; index < parent.length; index++) {
         parent[index].children[0].checked = false;
+        parent[index].children[0].nextElementSibling.nextElementSibling.children[0].classList.remove('line-through')
       }
       this.setStorage(todo);
       this.resetAnimation(day);

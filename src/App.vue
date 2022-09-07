@@ -1,7 +1,8 @@
 <template>
   <Header :time="time" :lessons="lessons" :lesson="lesson"/>
   <div class="container px-4 mx-auto mt-10">
-    <Table :lessons="lessons" :lesson="lesson" :today="today"/>
+    <Table :lessons="lessons" :lesson="lesson" :today="today" :homework="homework"/>
+    <Homework :lessons="lessons" @created="createdHandler" />
   </div>
   <footer class="bg-gray-900 text-amber-50 mt-auto mb-0">
     <div class="container mx-auto p-4">
@@ -34,6 +35,7 @@ export default {
         },
       },
       today: new Date().getDay() - 1,
+      homework: this.getHomework(),
     }
   },
   mounted() {
@@ -42,6 +44,15 @@ export default {
     feather.replace()
   },
   methods: {
+    getHomework() {
+      if (!localStorage.getItem('homework')) {
+        localStorage.setItem('homework', JSON.stringify([[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null]]))
+      }
+      return JSON.parse(localStorage.getItem('homework'))
+    },
+    createdHandler() {
+      this.homework = this.getHomework()
+    },
     updateNow() {
       this.time = {
         hours: new Date().toLocaleTimeString().split(':')[0],
