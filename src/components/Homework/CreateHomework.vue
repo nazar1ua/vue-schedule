@@ -57,8 +57,10 @@ function addHomework() {
         loading.value = false
         emit('created')
         isOpen.value = false
-        success.value = false
         homeworkText.value = ''
+        setTimeout(() => {
+            success.value = false
+        }, 200)
     }, 100)
 }
 

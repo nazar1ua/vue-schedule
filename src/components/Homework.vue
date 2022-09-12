@@ -10,7 +10,7 @@
           <h6 class="font-medium px-1.5">{{day.name}}</h6>
           <ul>
             <template v-for="(lesson, i) in day.lessons" :key="lesson">
-              <li v-if="homework[index][i] !== null" class="px-1.5">{{lesson}}: {{homework[index][i].text}}</li>
+              <li v-if="homework[index][i] !== null" class="px-1.5" :class="[homework[index][i].done ? 'line-through' : '']">{{lesson}}: {{homework[index][i].text}}</li>
             </template>
           </ul>
         </li>
@@ -23,23 +23,9 @@
 import CreateHomework from './Homework/CreateHomework.vue';
 export default {
   name: "Homework",
-  props: {
-    lessons: Object,
-  },
-  data() {
-    return {
-      homework: this.getHomework()
-    }
-  },
+  props: ['lessons', 'homework'],
   methods: {
-    getHomework() {
-      if (!localStorage.getItem('homework')) {
-        localStorage.setItem('homework', JSON.stringify([[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null]]))
-      }
-      return JSON.parse(localStorage.getItem('homework'))
-    },
     createdHandler() {
-      this.homework = this.getHomework()
       this.$emit('created')
     }
   },
