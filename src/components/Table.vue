@@ -51,6 +51,9 @@ export default {
       }
       return JSON.parse(localStorage.getItem('homework'))
     },
+    updateHomework() {
+      this.homework = this.getHomework()
+    },
     getStorage() {
       if (!localStorage.getItem('todo')) {
         localStorage.setItem('todo', JSON.stringify([[false, false, false, false, false, false, false], [false, false, false, false, false, false, false], [false, false, false, false, false, false, false], [false, false, false, false, false, false, false], [false, false, false, false, false, false, false]]));

@@ -1,8 +1,8 @@
 <template>
   <Header :time="time" :lessons="lessons" :lesson="lesson"/>
   <div class="container px-4 mx-auto mt-10">
-    <Table :lessons="lessons" :lesson="lesson" :today="today" @homework-change="updateHomework"/>
-    <Homework :lessons="lessons" :homework="homework" @created="updateHomework" />
+    <Table ref="table" :lessons="lessons" :lesson="lesson" :today="today" @homework-change="updateHomework"/>
+    <Homework :lessons="lessons" :homework="homework" @created="createdHandler" />
   </div>
 </template>
 
@@ -44,6 +44,10 @@ export default {
         localStorage.setItem('homework', JSON.stringify([[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null],[null,null,null,null,null,null,null]]))
       }
       return JSON.parse(localStorage.getItem('homework'))
+    },
+    createdHandler() {
+      this.$refs.table.updateHomework()
+      this.updateHomework()
     },
     updateHomework() {
       this.homework = this.getHomework()
