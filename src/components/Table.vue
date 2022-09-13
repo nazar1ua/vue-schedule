@@ -103,12 +103,18 @@ export default {
       todo[day].forEach((lesson, index) => {
         todo[day][index] = false;
       });
+      let homework = this.getHomework();
+      homework[day].forEach((lesson, index) => {
+        homework[day][index] = null
+      })
       const parent = this.$refs.grid.children[day].children[1].children;
       for (let index = 0; index < parent.length; index++) {
         parent[index].children[0].checked = false;
         parent[index].children[0].nextElementSibling.nextElementSibling.nextElementSibling.children[0].classList.remove('line-through')
       }
       this.setStorage(todo);
+      localStorage.setItem('homework', JSON.stringify(homework));
+      this.$emit('homeworkChange');
       this.resetAnimation(day);
     },
     resetAnimation(id) {
