@@ -16,7 +16,7 @@
           </span>
         </div>
         <div class="flex gap-2">
-          <p class="font-semibold hidden sm:block">
+          <p class="font-semibold" :class="[getLessonIndex() === null ? '' : 'hidden sm:block']">
             {{lesson}}
           </p>
           <ThemeButton/>
