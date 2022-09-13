@@ -12,6 +12,7 @@ import Header from "./components/Header.vue";
 import Table from "./components/Table.vue";
 import feather from "feather-icons";
 import Homework from "./components/Homework.vue";
+import { getLesson } from './components/GetLesson';
 
 export default {
   name: "App",
@@ -66,32 +67,7 @@ export default {
       this.lesson = this.getLesson();
     },
     getLesson() {
-      const
-          currentDate = new Date(),
-          formattedTime = currentDate.getTime(),
-          createDate = (hours, minutes) => {
-            return new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), Number(hours), Number(minutes)).getTime();
-          },
-          startLesson = createDate(lessons.schedule[0].start.split(':')[0], lessons.schedule[0].start.split(':')[1]),
-          endLesson = createDate(lessons.schedule[lessons.schedule.length - 1].end.split(':')[0], lessons.schedule[lessons.schedule.length - 1].end.split(':')[1]);
-      if (startLesson >= formattedTime || formattedTime >= endLesson) {
-        return 'Уроків немає';
-      }
-      const formattedDay = Number(currentDate.getDay() - 1);
-      if (typeof (lessons.days[formattedDay]) === 'undefined') {
-        return 'Сьогодні вихідний';
-      }
-      let value;
-      lessons.schedule.forEach((lessonTime, index) => {
-        const formattedLessonTime = {
-          start: createDate(lessonTime.start.split(':')[0], lessonTime.start.split(':')[1]),
-          end: createDate(lessonTime.end.split(':')[0], lessonTime.end.split(':')[1])
-        }
-        if (formattedLessonTime.start <= formattedTime && formattedTime <= formattedLessonTime.end) {
-          value = lessons.days[formattedDay].lessons[index];
-        }
-      })
-      return value || 'Перерва';
+      return getLesson(lessons)
     },
   },
 }
