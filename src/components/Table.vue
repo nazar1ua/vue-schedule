@@ -101,7 +101,7 @@ export default {
     resetDay(day) {
       let todo = this.getStorage();
       todo[day].forEach((lesson, index) => {
-        todo[day][index] = false;
+        todo[day][index].done = false;
       });
       let homework = this.getHomework();
       homework[day].forEach((lesson, index) => {
