@@ -8,8 +8,11 @@
             <span class="blink">:</span>
             {{time.minutes}}
           </span>
-          <span v-if="getLessonIndex() !== null" class="inline-flex gap-[1px] rounded-full border border-indigo-500 dark:border-indigo-300 px-2 bg-indigo-100 dark:bg-indigo-600">
+          <span v-if="getLessonIndex() !== null" class="inline-flex mr-2 gap-[1px] rounded-full border border-indigo-500 dark:border-indigo-300 px-2 bg-indigo-100 dark:bg-indigo-600">
             Час до кінця: {{timeToEnd}} хв
+          </span>
+          <span class="inline-flex gap-[1px] rounded-full border border-indigo-500 dark:border-indigo-300 px-2 bg-indigo-100 dark:bg-indigo-600">
+            {{new Date().getDate()}}.{{new Date().getMonth() + 1 < 10 ? '0' + (new Date().getMonth() + 1) : new Date().getMonth() + 1}}
           </span>
         </div>
         <div class="flex gap-2">

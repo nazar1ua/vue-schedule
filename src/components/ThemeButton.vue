@@ -61,7 +61,13 @@ export default {
   },
   mounted() {
     this.changeTheme(true);
-  }
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      this.changeTheme(true)
+    })
+  },
+  unmounted() {
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change')
+  },
 }
 </script>
 
