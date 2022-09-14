@@ -60,6 +60,9 @@ export default {
       }
       return JSON.parse(localStorage.getItem('todo'));
     },
+    updateStorage() {
+      this.todo = this.getStorage()
+    },
     setStorage(value) {
       localStorage.setItem('todo', JSON.stringify(value));
     },

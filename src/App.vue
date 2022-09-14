@@ -47,6 +47,7 @@ export default {
       return JSON.parse(localStorage.getItem('homework'))
     },
     createdHandler() {
+      this.$refs.table.updateStorage()
       this.$refs.table.updateHomework()
       this.updateHomework()
     },
