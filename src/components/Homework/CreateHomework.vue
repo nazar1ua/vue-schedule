@@ -111,7 +111,7 @@ watch(selectedDay, async newValue => {
                                 </div>
                                 <div class="mt-2">
                                     <label for="homework-text" class="text-sm">Введіть завдання</label>
-                                    <input type="text" placeholder="Нприклад: вивчити вірш..." v-model="homeworkText" class="mt-1 w-full rounded-lg py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm
+                                    <input type="text" placeholder="Нприклад: вивчити вірш..." v-model="homeworkText" @keyup.enter="addHomework" class="mt-1 w-full rounded-lg py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm
                                     bg-white border-indigo-500 focus-visible:border-indigo-500 focus-visible:ring-white focus-visible:ring-offset-indigo-300
                                     dark:bg-gray-900 dark:focus-visible:ring-gray-900 dark:focus-visible:ring-offset-indigo-700">
                                 </div>
