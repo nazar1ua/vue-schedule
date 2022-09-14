@@ -101,11 +101,11 @@ export default {
     resetDay(day) {
       let todo = this.getStorage();
       todo[day].forEach((lesson, index) => {
-        todo[day][index].done = false;
+        todo[day][index] = false;
       });
       let homework = this.getHomework();
       homework[day].forEach((lesson, index) => {
-        homework[day][index] = null
+        homework[day][index].done = false
       })
       const parent = this.$refs.grid.children[day].children[1].children;
       for (let index = 0; index < parent.length; index++) {
