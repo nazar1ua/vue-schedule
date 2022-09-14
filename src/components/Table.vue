@@ -105,7 +105,9 @@ export default {
       });
       let homework = this.getHomework();
       homework[day].forEach((lesson, index) => {
-        homework[day][index].done = false
+        if (homework[day][index] !== null) {
+          homework[day][index].done = false
+        }
       })
       const parent = this.$refs.grid.children[day].children[1].children;
       for (let index = 0; index < parent.length; index++) {
