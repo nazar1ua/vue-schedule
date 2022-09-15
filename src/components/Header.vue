@@ -3,7 +3,7 @@
     <div class="container px-4 py-2 mx-auto">
       <div class="flex justify-between items-center">
         <div class="shrink-0">
-          <span class="hidden sm:inline-flex mr-2 gap-[1px] rounded-full border border-indigo-500 dark:border-indigo-300 px-2 bg-indigo-100 dark:bg-indigo-600">
+          <span :class="[getLessonIndex() !== null ? 'hidden sm:inline-flex' : 'inline-flex']" class="mr-2 gap-[1px] rounded-full border border-indigo-500 dark:border-indigo-300 px-2 bg-indigo-100 dark:bg-indigo-600">
             {{ time.hours }}
             <span class="blink">:</span>
             {{time.minutes}}
