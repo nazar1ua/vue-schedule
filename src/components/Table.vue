@@ -4,16 +4,7 @@
       <div v-show="day.lessons.length > 0" class="border border-indigo-300 rounded-xl pt-1" :class="{ 'bg-indigo-50 dark:bg-indigo-900': index === today }">
         <div class="px-2 pb-1 flex justify-between items-center">
           <h1 class="font-bold text-lg font-serif">{{day.name}}</h1>
-          <button @click="resetDay(index)" :ref="'reset-' + index"
-            class="reset-button rounded focus:outline-none focus-visible:ring focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 focus-visible:ring-indigo-300 dark:focus-visible:ring-indigo-500"
-            :class="{ 'focus-visible:ring-offset-indigo-50 dark:focus-visible:ring-offset-indigo-900': index === today }">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="select-none">
-              <polyline points="1 4 1 10 7 10"></polyline>
-              <polyline points="23 20 23 14 17 14"></polyline>
-              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-            </svg>
-          </button>
+          <ClearHovework :today="index === today" @reset-done="clearHomework(index)" @reset-homework="clearHomework(index, true)" />
         </div>
         <ul>
           <li class="flex items-center px-2 py-0.5 border-t border-t-indigo-300" v-for="(subject, number) in day.lessons" :key="subject + number + Math.random()">
@@ -32,10 +23,11 @@
 <script>
 import Icon from './Icon.vue'
 import Emoji from './Emoji.vue'
+import ClearHovework from './Homework/ClearHovework.vue'
 
 export default {
   name: "Table",
-  components: { Icon, Emoji },
+  components: { Icon, Emoji, ClearHovework },
   props: ['lessons', 'lesson', 'today'],
   emits: ['homeworkChange'],
   data() {
@@ -101,14 +93,16 @@ export default {
       event.target.checked = !event.target.checked
       this.handleChange(event)
     },
-    resetDay(day) {
+    clearHomework(day, purge = false) {
       let todo = this.getStorage();
       todo[day].forEach((lesson, index) => {
         todo[day][index] = false;
       });
       let homework = this.getHomework();
       homework[day].forEach((lesson, index) => {
-        if (homework[day][index] !== null) {
+        if (purge) {
+          homework[day][index] = null
+        } else if (!purge && homework[day][index] !== null) {
           homework[day][index].done = false
         }
       })
@@ -116,18 +110,13 @@ export default {
       for (let index = 0; index < parent.length; index++) {
         parent[index].children[0].checked = false;
         parent[index].children[0].nextElementSibling.nextElementSibling.nextElementSibling.children[0].classList.remove('line-through')
+        if (purge) {
+          parent[index].children[0].nextElementSibling.nextElementSibling.nextElementSibling.children[0].innerText = ''
+        }
       }
       this.setStorage(todo);
       localStorage.setItem('homework', JSON.stringify(homework));
       this.$emit('homeworkChange');
-      this.resetAnimation(day);
-    },
-    resetAnimation(id) {
-      const target = this.$refs['reset-' + id][0];
-      target.classList.add('active');
-      target.addEventListener('animationend', () => {
-        target.classList.remove('active');
-      });
     },
   },
 }
