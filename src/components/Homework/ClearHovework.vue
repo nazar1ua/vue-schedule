@@ -54,7 +54,8 @@ const resetAnimation = () => {
                   leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                   <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-900 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                      <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
-                        <button type="button" class="rounded-md bg-white dark:bg-gray-900 text-gray-400 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                        <button type="button"
+                           class="rounded-md bg-white dark:bg-gray-900 text-gray-400 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                            @click="open = false">
                            <span class="sr-only">Закрити</span>
                            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -67,7 +68,8 @@ const resetAnimation = () => {
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                            <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Очистити домашнє завдання</DialogTitle>
                            <div class="mt-2">
-                              <p class="text-sm text-gray-500 dark:text-gray-400">Виберіть: очистити тільки статус завдань, чи видалити все домашнє завдання за день. Або просто закрийте це вікно, якщо натиснули
+                              <p class="text-sm text-gray-500 dark:text-gray-400">Виберіть: очистити тільки статус завдань, чи видалити все домашнє завдання за день. Або просто закрийте це вікно, якщо
+                                 натиснули
                                  помилково.</p>
                            </div>
                         </div>
@@ -90,4 +92,26 @@ const resetAnimation = () => {
       </Dialog>
    </TransitionRoot>
 </template>
+
+<style scoped>
+.reset-button {
+   transition-property: transform, box-shadow;
+   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+   transition-duration: 150ms;
+}
+
+.reset-button.active svg {
+   animation: 200ms linear rotate;
+}
+
+@keyframes rotate {
+   from {
+      transform: rotate(0deg);
+   }
+
+   to {
+      transform: rotate(360deg);
+   }
+}
+</style>
  

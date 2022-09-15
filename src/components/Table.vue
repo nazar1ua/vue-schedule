@@ -121,25 +121,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.reset-button {
-  transition-property: transform, box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.reset-button.active svg {
-  animation: 200ms linear rotate;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-</style>
