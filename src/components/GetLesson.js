@@ -7,24 +7,26 @@ export const getLesson = (lessons) => {
         },
         startLesson = createDate(lessons.schedule[0].start.split(':')[0], lessons.schedule[0].start.split(':')[1]),
         endLesson = createDate(lessons.schedule[lessons.schedule.length - 1].end.split(':')[0], lessons.schedule[lessons.schedule.length - 1].end.split(':')[1]);
-    if (startLesson >= formattedTime || formattedTime >= endLesson) {
+    if ((startLesson >= formattedTime || formattedTime >= endLesson)) {
         return 'Уроків немає';
     }
     const formattedDay = Number(currentDate.getDay() - 1);
     if (typeof (lessons.days[formattedDay]) === 'undefined') {
         return 'Сьогодні вихідний';
     }
-    let value;
+    let value = 'Перерва';
     lessons.schedule.forEach((lessonTime, index) => {
         const formattedLessonTime = {
             start: createDate(lessonTime.start.split(':')[0], lessonTime.start.split(':')[1]),
             end: createDate(lessonTime.end.split(':')[0], lessonTime.end.split(':')[1])
         }
         if (formattedLessonTime.start <= formattedTime && formattedTime <= formattedLessonTime.end) {
-            value = lessons.days[formattedDay].lessons[index];
+            if (lessons.days[formattedDay].lessons.length - 1 <= index) {
+                value = lessons.days[formattedDay].lessons[index] ? lessons.days[formattedDay].lessons[index] : 'Уроків немає'
+            }
         }
     })
-    return value || 'Перерва';
+    return value;
 }
 
 export const getLessonIndex = (lessons) => {
@@ -43,17 +45,19 @@ export const getLessonIndex = (lessons) => {
     if (typeof (lessons.days[formattedDay]) === 'undefined') {
         return null;
     }
-    let value;
+    let value = null;
     lessons.schedule.forEach((lessonTime, index) => {
         const formattedLessonTime = {
             start: createDate(lessonTime.start.split(':')[0], lessonTime.start.split(':')[1]),
             end: createDate(lessonTime.end.split(':')[0], lessonTime.end.split(':')[1])
         }
         if (formattedLessonTime.start <= formattedTime && formattedTime <= formattedLessonTime.end) {
-            value = index
+            if (lessons.days[formattedDay].lessons.length - 1 <= index) {
+                value = lessons.days[formattedDay].lessons[index] ? index : null
+            }
         }
     })
-    return value || null;
+    return value;
 }
 
 export const timeToDate = (str) => {
