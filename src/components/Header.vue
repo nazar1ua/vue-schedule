@@ -38,9 +38,6 @@ export default {
       return this.getLessonIndex() === null ? '' : getTimeToEnd(`${this.time.hours}:${this.time.minutes}`, this.lessons.schedule[this.lessons.days[this.time.day.number].lessons.indexOf(this.lesson)].end)
     },
   },
-  mounted() {
-    console.log(this.getLessonIndex())
-  },
   methods: {
     getLessonIndex() {
       return getLessonIndex(this.lessons)

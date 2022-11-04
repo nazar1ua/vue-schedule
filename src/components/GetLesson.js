@@ -21,12 +21,10 @@ export const getLesson = (lessons) => {
             end: createDate(lessonTime.end.split(':')[0], lessonTime.end.split(':')[1])
         }
         if (formattedLessonTime.start <= formattedTime && formattedTime <= formattedLessonTime.end) {
-            if (lessons.days[formattedDay].lessons.length - 1 <= index) {
-                value = lessons.days[formattedDay].lessons[index] ? lessons.days[formattedDay].lessons[index] : 'Уроків немає'
-            }
+            value = lessons.days[formattedDay]?.lessons[index]
         }
     })
-    return value;
+    return value ?? 'Уроків немає';
 }
 
 export const getLessonIndex = (lessons) => {
@@ -53,11 +51,11 @@ export const getLessonIndex = (lessons) => {
         }
         if (formattedLessonTime.start <= formattedTime && formattedTime <= formattedLessonTime.end) {
             if (lessons.days[formattedDay].lessons.length - 1 <= index) {
-                value = lessons.days[formattedDay].lessons[index] ? index : null
+                value = lessons.days[formattedDay]?.lessons[index] ? index : null
             }
         }
     })
-    return value;
+    return value ?? null;
 }
 
 export const timeToDate = (str) => {
